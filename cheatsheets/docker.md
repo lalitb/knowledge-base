@@ -125,6 +125,28 @@ CMD ["myapp"]
 | Use `slim` / `alpine` base for runtime | Minimize attack surface and size |
 | Put rarely-changing layers first | Better cache hits |
 
+## Local Kubernetes Image Workflows (minikube/kind)
+
+```bash
+# Minikube: build directly in minikube's Docker daemon
+eval $(minikube docker-env)
+docker build -t greeting-service:latest .
+
+# OR build locally and load into minikube
+docker build -t greeting-service:latest .
+minikube image load greeting-service:latest
+
+# kind: load local image into kind cluster nodes
+docker build -t greeting-service:latest .
+kind load docker-image greeting-service:latest --name kind
+```
+
+| Tip | Why |
+|---|---|
+| Keep image tag stable (`:latest`) while learning | Fewer manifest edits during fast iteration |
+| Use `imagePullPolicy: Never` for local-only images | Prevents `ImagePullBackOff` |
+| Switch to full registry paths + `Always` for remote clusters | Matches production pull behavior |
+
 ## Compose Basics
 
 | Command | What it does | Example |

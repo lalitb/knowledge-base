@@ -25,6 +25,21 @@ You know some Rust (cargo, structs, async/await) but you've never touched Docker
 
 > **Tip:** If you don't have a remote cluster, `minikube start` or `kind create cluster` will give you a local one in minutes.
 
+## Choose Your Path (Local vs Remote) Before You Start
+
+Pick one path now and use it consistently through Parts 2-5:
+
+- **Path A — Local cluster (minikube/kind):**
+  - Build images locally.
+  - Use local image loading (`eval $(minikube docker-env)` / `minikube image load` / `kind load docker-image`).
+  - Keep `imagePullPolicy: Never` while learning.
+- **Path B — Remote cluster (AKS/EKS/GKE):**
+  - Push images to a registry (GHCR/Docker Hub/ACR).
+  - Use full image names in manifests (e.g., `ghcr.io/org/repo/greeting-service:TAG`).
+  - Set `imagePullPolicy: Always`.
+
+> You can switch paths later, but sticking to one path avoids the most common beginner issue: `ImagePullBackOff`.
+
 ---
 
 ## Table of Contents
@@ -941,6 +956,30 @@ helm uninstall my-greeting
 >
 > Instead of `kubectl apply -f` on multiple files, you run `helm install` once.
 > Instead of editing YAML for production, you pass `--set replicaCount=5`.
+
+---
+
+# Checkpoint: Verify Everything Before Part 5 (Operator)
+
+Before continuing, confirm Parts 1-4 are working. If any check fails, fix it first.
+
+```bash
+# 1) Rust service works locally
+curl http://localhost:3000/health
+
+# 2) Docker image exists
+docker images | grep greeting-service
+
+# 3) Kubernetes deployment is healthy
+kubectl get pods -n greeting
+kubectl get svc -n greeting
+
+# 4) Helm release is healthy (if you followed Part 4)
+helm list -n greeting
+helm status my-greeting -n greeting
+```
+
+If all green, you're ready for the biggest jump: building the operator.
 
 ---
 

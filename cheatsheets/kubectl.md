@@ -140,6 +140,37 @@ kubectl debug mypod -it --image=busybox --target=mycontainer
 | `kubectl create role <r> --verb=get --resource=pods` | Create role | `kubectl create role pod-reader --verb=get,list --resource=pods` |
 | `kubectl create rolebinding <rb> --role=<r> --user=<u>` | Bind role to user | `kubectl create rolebinding dev-pods --role=pod-reader --user=dev` |
 
+## Operators & CRDs
+
+| Command | What it does | Example |
+|---|---|---|
+| `kubectl get crd` | List installed CRDs | `kubectl get crd \| grep greeting` |
+| `kubectl explain <crd>.spec` | Show CR schema fields | `kubectl explain greetingservices.spec` |
+| `kubectl get <cr-plural>` | List custom resources | `kubectl get greetingservices -n greeting` |
+| `kubectl get <shortname>` | List custom resources via shortname | `kubectl get gs -n greeting` |
+| `kubectl describe <shortname> <name>` | Detailed custom resource info | `kubectl describe gs my-greeter -n greeting` |
+| `kubectl get <shortname> <name> -o yaml` | Inspect spec + status | `kubectl get gs my-greeter -n greeting -o yaml` |
+| `kubectl logs -l app=<operator-label>` | View operator logs | `kubectl logs -n greeting -l app=greeting-operator --tail=100` |
+
+## CI/CD + RBAC Debug (Fast Path)
+
+```bash
+# CI deploy says "forbidden"?
+kubectl auth can-i apply deployments -n greeting
+kubectl auth can-i create secrets -n greeting
+kubectl auth can-i patch services -n greeting
+
+# Confirm what service account CI job is using (in-cluster jobs)
+kubectl auth can-i --list -n greeting
+
+# Dry-run apply before merge
+kubectl apply --dry-run=server -f k8s/
+
+# Rollout status after deployment
+kubectl rollout status deployment/greeting-service -n greeting
+kubectl get events -n greeting --sort-by='.lastTimestamp' | tail -20
+```
+
 ## Quick Troubleshooting
 
 | Symptom | Commands to Run |
