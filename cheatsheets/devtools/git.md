@@ -197,4 +197,4 @@ git reset --hard def5678
 
 ---
 
-*See [Kubernetes 101](../tutorials/rust-k8s-operator/README.md#part-3-kubernetes-101--deploy-with-kubectl) for Git workflows in the context of deploying to K8s.*
+*See [Kubernetes 101](../../tutorials/rust-k8s-operator/README.md#part-3-kubernetes-101--deploy-with-kubectl) for Git workflows in the context of deploying to K8s.*

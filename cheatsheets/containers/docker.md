@@ -163,4 +163,4 @@ kind load docker-image greeting-service:latest --name kind
 
 ---
 
-*See [Kubernetes 101](../tutorials/rust-k8s-operator/README.md#part-3-kubernetes-101--deploy-with-kubectl) for deploying containers to K8s.*
+*See [Kubernetes 101](../../tutorials/rust-k8s-operator/README.md#part-3-kubernetes-101--deploy-with-kubectl) for deploying containers to K8s.*

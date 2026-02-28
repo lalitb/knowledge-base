@@ -163,4 +163,4 @@ helm dependency build ./mychart    # Rebuilds from Chart.lock
 
 ---
 
-*See [Kubernetes 101](../tutorials/rust-k8s-operator/README.md#part-3-kubernetes-101--deploy-with-kubectl) for deploying with kubectl before graduating to Helm.*
+*See [Kubernetes 101](../../tutorials/rust-k8s-operator/README.md#part-3-kubernetes-101--deploy-with-kubectl) for deploying with kubectl before graduating to Helm.*

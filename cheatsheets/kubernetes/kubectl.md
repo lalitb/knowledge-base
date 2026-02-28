@@ -184,4 +184,4 @@ kubectl get events -n greeting --sort-by='.lastTimestamp' | tail -20
 
 ---
 
-*See [Kubernetes 101](../tutorials/rust-k8s-operator/README.md#part-3-kubernetes-101--deploy-with-kubectl) for detailed walkthrough.*
+*See [Kubernetes 101](../../tutorials/rust-k8s-operator/README.md#part-3-kubernetes-101--deploy-with-kubectl) for detailed walkthrough.*

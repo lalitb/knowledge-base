@@ -165,4 +165,4 @@ cargo build --release --target x86_64-unknown-linux-musl
 
 ---
 
-*See [Rust Operator Tutorial](../tutorials/rust-k8s-operator/README.md) for a full Rust project walkthrough.*
+*See [Rust Operator Tutorial](../../tutorials/rust-k8s-operator/README.md) for a full Rust project walkthrough.*
