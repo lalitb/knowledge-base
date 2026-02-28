@@ -58,20 +58,41 @@ OpenClaw manages channels, routing, tools, and session behavior. Ollama runs the
 
 # Part 1: Prepare Raspberry Pi 5
 
-## Step 1: Update System
+## Step 1: Install Raspberry Pi OS (if your Pi is still blank)
+
+On another computer:
+
+1. Install and open **Raspberry Pi Imager**.
+2. Choose **Raspberry Pi OS (64-bit)**.
+3. Select your microSD card (or SSD target), then write.
+4. In Imager advanced options, preconfigure:
+   - hostname,
+   - username/password,
+   - Wi-Fi (if needed),
+   - SSH enabled (recommended).
+
+Then boot the Pi 5 from that media and log in (SSH or local keyboard/monitor).
+
+Checkpoint: run this on the Pi and confirm it prints Linux/arm64 info:
+
+```bash
+uname -a
+```
+
+## Step 2: Update System
 
 ```bash
 sudo apt update && sudo apt full-upgrade -y
 sudo reboot
 ```
 
-## Step 2: Install Core Utilities
+## Step 3: Install Core Utilities
 
 ```bash
 sudo apt install -y curl git build-essential jq htop
 ```
 
-## Step 3: Install Node.js 22+
+## Step 4: Install Node.js 22+
 
 ```bash
 curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
